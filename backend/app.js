@@ -7,4 +7,8 @@ app.use(express.json());
 app.use(express.static(`../frontend`));
 
 app.use("/api/v1/reviews", reviewRouter);
+app.all("*", (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
+});
+
 module.exports = app;
