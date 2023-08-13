@@ -1,0 +1,40 @@
+[
+  {
+    "id": 0,
+    "name": "Starbucks",
+    "location": "NEX Serangoon",
+    "coffeeType": "Ice Venti Latte",
+    "price": 8,
+    "rating": 3,
+    "visitedAt": "2023-06-19T09:00:00.000Z"
+  },
+  {
+    "id": 1,
+    "name": "Tiong Bahru Bakery",
+    "location": "Anchorpoint Mall",
+    "coffeeType": "Ice Latte",
+    "price": 7,
+    "rating": 3.5,
+    "visitedAt": "2023-05-19T09:00:00.000Z",
+    "description": "Cafe has a good ambience, coffee is strong and aromatic"
+  },
+  {
+    "id": 2,
+    "name": "Dutch Colony Coffee Co.",
+    "location": "New Tech Park",
+    "coffeeType": "Ice Mocha",
+    "price": 6.5,
+    "rating": 3,
+    "visitedAt": "2023-03-19T09:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "YaKun Kaya Toast",
+    "location": "NEX Serangoon",
+    "coffeeType": "Kopi Bing Siew Dai",
+    "price": 2.5,
+    "rating": 4,
+    "visitedAt": "2023-07-30T09:00:00.000Z",
+    "description": "Shop is always crowded but it is a good morning coffee"
+  }
+]
