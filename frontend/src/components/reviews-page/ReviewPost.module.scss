@@ -1,0 +1,23 @@
+.postContainer {
+  margin: 20px;
+  padding: 10px;
+  height: 300px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.reviewName {
+  font-weight: 600;
+  color: black;
+}
+.reviewLocation {
+  color: black;
+}
+
+.reviewRating {
+  color: black;
+}

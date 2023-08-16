@@ -1,0 +1,23 @@
+.reviewsScreen {
+  width: 100%;
+  height: 100%;
+}
+
+.reviewsContent {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.header {
+  color: black;
+  font-weight: 500;
+  font-size: 2em;
+  padding: 20px 50px 20px;
+  text-align: center;
+}
+.reviewsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
