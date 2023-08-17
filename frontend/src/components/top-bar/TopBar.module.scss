@@ -21,18 +21,54 @@
   gap: 44px;
 }
 
-.location,
-.coffeeType,
-.recent {
+.selected {
+  border-color: transparent;
+  border-radius: 20px;
+  color: white;
+  width: 200px;
+  height: 45px;
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.unselected {
+  position: relative;
+  border-color: transparent;
+  border-radius: 20px;
+  padding: 5px 10px;
+  color: #774a47;
+  width: 200px;
+  height: 45px;
+  font-size: 20px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  // font-weight: 700;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.unselected:hover {
+  color: #977c5a;
+}
+
+.tabBar {
   display: flex;
   align-items: center;
   justify-self: center;
-  width: 100%;
+  // width: 100%;
   cursor: pointer;
   line-height: 100%;
   display: flex;
-  width: 180px;
   height: 45px;
+  width: max-content;
   justify-content: center;
   flex-shrink: 0;
   border-radius: 20px;
@@ -44,6 +80,9 @@
   background-color: #977c5a;
   .tabText {
     color: white;
+    img {
+      filter: brightness(109%) contrast(106%);
+    }
   }
 }
 .tabText {

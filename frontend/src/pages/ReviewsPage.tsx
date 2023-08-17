@@ -9,6 +9,7 @@ function ReviewsPage() {
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAllReviews();
+      console.log(res);
       setAllReviews(res);
     };
     fetchData();
