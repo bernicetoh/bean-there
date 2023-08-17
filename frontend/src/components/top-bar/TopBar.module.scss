@@ -1,0 +1,88 @@
+.topbarContainer {
+  display: flex;
+  padding: 10px 0px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 71px;
+  border-radius: 30px;
+  background: #f5f5f5;
+}
+.logoImg {
+  width: 250px;
+  height: 49.674px;
+  display: flex;
+}
+
+.tabBar {
+  display: flex;
+  padding: 10px 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 44px;
+}
+
+.location,
+.coffeeType,
+.recent {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  width: 100%;
+  cursor: pointer;
+  line-height: 100%;
+  display: flex;
+  width: 180px;
+  height: 45px;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+.location:hover,
+.coffeeType:hover,
+.recent:hover {
+  background-color: #977c5a;
+  .tabText {
+    color: white;
+  }
+}
+.tabText {
+  color: #774a47;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.authContainer {
+  display: flex;
+  padding: 11px 14px 12px 30px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 25px;
+}
+
+.login {
+  color: #977c5a;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.signup {
+  width: 115px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #774a47;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

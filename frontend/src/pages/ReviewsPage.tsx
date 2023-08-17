@@ -3,6 +3,7 @@ import { Review } from "../models/review.model";
 import { getAllReviews } from "../services/review";
 import ReviewPost from "../components/reviews-page/ReviewPost";
 import styles from "./ReviewsPage.module.scss";
+import TopBar from "../components/top-bar/TopBar";
 function ReviewsPage() {
   const [allReviews, setAllReviews] = useState<Review[]>([]);
   useEffect(() => {
@@ -15,7 +16,7 @@ function ReviewsPage() {
   return (
     <div className={styles.reviewsScreen}>
       <div className={styles.reviewsContent}>
-        <div className={styles.header}>Bean There</div>
+        <TopBar selectedTab={"Reviews"} isLoggedIn={false} />
         {allReviews && (
           <div className={styles.reviewsContainer}>
             {allReviews.map((review) => (

@@ -1,23 +1,43 @@
 .postContainer {
-  margin: 20px;
-  padding: 10px;
-  height: 300px;
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  border: 1px solid black;
+  border-radius: 5px;
+  background: #f5f5f5;
+  width: 263px;
+  height: 298px;
+  flex-shrink: 0;
 }
 
+.details {
+  width: 221.872px;
+  height: 62px;
+  flex-shrink: 0;
+}
 .reviewName {
+  color: #774a47;
+  font-size: 16px;
+  font-style: normal;
   font-weight: 600;
-  color: black;
+  line-height: normal;
 }
 .reviewLocation {
   color: black;
 }
 
 .reviewRating {
-  color: black;
+  display: flex;
+  padding: 4px 20px 4px 23px;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-radius: 5px;
+  background: #977c5a;
+  img {
+    width: 14px;
+    height: 14px;
+  }
 }
