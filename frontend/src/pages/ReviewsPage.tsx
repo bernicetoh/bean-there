@@ -17,7 +17,7 @@ function ReviewsPage() {
   return (
     <div className={styles.reviewsScreen}>
       <div className={styles.reviewsContent}>
-        <TopBar selectedTab={"Reviews"} isLoggedIn={false} />
+        {/* <TopBar isLoggedIn={false} /> */}
         {allReviews && (
           <div className={styles.reviewsContainer}>
             {allReviews.map((review) => (

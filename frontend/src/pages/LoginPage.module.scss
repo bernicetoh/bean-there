@@ -1,0 +1,127 @@
+.loginscreen {
+  background-color: #704638;
+  height: 100%;
+  width: 100%;
+}
+
+.login-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background-color: #d2cbc5;
+  height: 600px;
+  width: 800px;
+  border-radius: 20px;
+  display: flex;
+}
+
+.left-container {
+  height: 100%;
+  width: 50%;
+}
+.right-container {
+  background-color: #ebe6e2;
+  flex: 1;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  padding: 20px 10px;
+  display: flex;
+  //   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  h1 {
+    margin-bottom: 0px;
+    color: #704638;
+    margin-top: 10px;
+  }
+  p {
+    font-size: 13px;
+    color: #704638;
+  }
+  .logo {
+    scale: 1.1;
+  }
+}
+.form {
+  padding: 10px 50px;
+  display: flex;
+  flex-direction: column;
+}
+.input-box {
+  display: flex;
+  flex-direction: column;
+  border-bottom: #5f4e38 1px solid;
+  margin-bottom: 20px;
+
+  input {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    color: black;
+  }
+  label {
+    color: #704638;
+  }
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.login {
+  flex: 1;
+  display: flex;
+  border-radius: 25px;
+  border: 1px solid #704638;
+  background-color: transparent;
+  color: #704638;
+  //   border: none;
+  padding: 13px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-top: 10px;
+  button {
+    border: 1px solid #704638;
+  }
+}
+
+.no-acc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  p {
+    font-size: 13px;
+    color: #704638;
+  }
+  .signup-link {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    color: #704638;
+  }
+}
+.error {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b85147;
+  font-size: 12px;
+}
