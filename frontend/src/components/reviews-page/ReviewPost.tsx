@@ -1,4 +1,3 @@
-import React from "react";
 import { Review } from "../../models/review.model";
 import styles from "./ReviewPost.module.scss";
 import star from "../../assets/star.svg";

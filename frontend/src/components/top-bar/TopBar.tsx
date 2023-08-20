@@ -15,9 +15,9 @@ interface Props {
 function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
   return (
     <div className={styles.topbarContainer}>
-      <div className={styles.logoImg}>
+      <Link className={styles.logoImg} to={"/home"}>
         <img src={logo} alt="logo" />
-      </div>
+      </Link>
       <div className={styles.tabBar}>
         {tabs.map((item) => (
           <div className={styles["tab"]}>
@@ -34,13 +34,16 @@ function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
                 <motion.div
                   layoutId="underline"
                   style={{
-                    borderBottom: "1.5px solid #704638",
+                    borderBottom: "2px solid #704638",
                     // justifyContent: "center",
                     display: "flex",
+                    width: "50%",
+                    alignSelf: "center",
                     // alignItems: "center",
                     // backgroundColor: "#977c5a",
                     position: "absolute",
                     inset: 0,
+                    margin: "0 auto",
                     // borderRadius: 20,
                   }}
                 />

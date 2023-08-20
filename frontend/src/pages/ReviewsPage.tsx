@@ -3,7 +3,6 @@ import { Review } from "../models/review.model";
 import { getAllReviews } from "../services/review";
 import ReviewPost from "../components/reviews-page/ReviewPost";
 import styles from "./ReviewsPage.module.scss";
-import TopBar from "../components/top-bar/TopBar";
 function ReviewsPage() {
   const [allReviews, setAllReviews] = useState<Review[]>([]);
   useEffect(() => {
