@@ -16,12 +16,15 @@ function AuthenticatedPage() {
 
   return (
     <div>
-      <TopBar
-        isLoggedIn={false}
-        setSelectedTab={setSelectedTab}
-        selectedTab={selectedTab}
-        tabs={tabs}
-      />
+      <div style={{ position: "sticky", top: 0 }}>
+        <TopBar
+          isLoggedIn={false}
+          setSelectedTab={setSelectedTab}
+          selectedTab={selectedTab}
+          tabs={tabs}
+        />
+      </div>
+
       <AnimatePresence>
         <motion.div
           key={selectedTab ? selectedTab : "empty"}

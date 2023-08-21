@@ -64,7 +64,7 @@
 .input-box {
   display: flex;
   flex-direction: column;
-  border-bottom: #5f4e38 1px solid;
+  border-bottom: #5f4e38 1.5px solid;
   margin-bottom: 20px;
 
   input {
@@ -87,7 +87,7 @@ input:focus {
   flex: 1;
   display: flex;
   border-radius: 25px;
-  border: 1px solid #704638;
+  border: 1.5px solid #704638;
   background-color: transparent;
   color: #704638;
   //   border: none;
@@ -97,7 +97,7 @@ input:focus {
   font-weight: 600;
   margin-top: 10px;
   button {
-    border: 1px solid #704638;
+    border: 1.5px solid #704638;
   }
 }
 

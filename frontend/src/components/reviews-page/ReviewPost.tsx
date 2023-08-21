@@ -2,6 +2,7 @@ import { Review } from "../../models/review.model";
 import styles from "./ReviewPost.module.scss";
 import star from "../../assets/star.svg";
 import coffeeImg from "../../assets/coffee.png";
+import { convertDate } from "../../utils/formattings";
 interface Props {
   review: Review;
 }
@@ -26,7 +27,7 @@ function ReviewPost({ review }: Props) {
           </div>
         </div>
         <div className={styles.username}>Username1234</div>
-        <div className={styles.date}>16 August 2023 3:40pm</div>
+        <div className={styles.date}>{convertDate(review.createdAt)}</div>
       </div>
     </div>
   );

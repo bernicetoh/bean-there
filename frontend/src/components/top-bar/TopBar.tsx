@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./TopBar.module.scss";
-import logo from "../../assets/bean-logo.svg";
+import logo from "../../assets/bean-outline.svg";
 import chevronDown from "../../assets/chevron-down.svg";
 import { motion } from "framer-motion";
 import { AuthMode } from "../../pages/AuthenticatedPage";
@@ -15,7 +15,7 @@ interface Props {
 function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
   return (
     <div className={styles.topbarContainer}>
-      <Link className={styles.logoImg} to={"/home"}>
+      <Link className={styles.logoImg} to={"/"}>
         <img src={logo} alt="logo" />
       </Link>
       <div className={styles.tabBar}>
@@ -34,7 +34,7 @@ function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
                 <motion.div
                   layoutId="underline"
                   style={{
-                    borderBottom: "2px solid #704638",
+                    borderBottom: "1.5px solid #704638",
                     // justifyContent: "center",
                     display: "flex",
                     width: "50%",
