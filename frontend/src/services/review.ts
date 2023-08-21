@@ -21,3 +21,9 @@ export async function getAllReviews(
     return [];
   }
 }
+
+export async function getReviewById(id: string): Promise<Review> {
+  const res = await axios.get(`/reviews/${id}`);
+  const parsedData: Review = res.data.data as Review;
+  return parsedData;
+}

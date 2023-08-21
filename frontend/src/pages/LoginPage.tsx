@@ -3,10 +3,35 @@ import styles from "./LoginPage.module.scss";
 import { Link } from "react-router-dom";
 import { login } from "../services/authentication";
 import logo from "../assets/bean-logo.svg";
+import beanWhite from "../assets/bean-white.svg";
+import beanBrown from "../assets/bean-brown.svg";
+
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const useMousePosition = () => {
+    const [mousePosition, setMousePosition] = React.useState({
+      x: 0,
+      y: 0,
+    });
+
+    React.useEffect(() => {
+      const updateMousePosition = (ev: any) => {
+        setMousePosition({ x: ev.clientX, y: ev.clientY });
+      };
+
+      window.addEventListener("mousemove", updateMousePosition);
+
+      return () => {
+        window.removeEventListener("mousemove", updateMousePosition);
+      };
+    }, []);
+
+    return mousePosition;
+  };
+  const mousePosition = useMousePosition();
+
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     const error = invalidForm();
@@ -49,11 +74,16 @@ function LoginPage() {
     setEmail("");
     setPassword("");
   }
+
   return (
     <div className={styles["loginscreen"]}>
       <div className={styles["login-content"]}>
         <div className={styles["login-card"]}>
-          <div className={styles["left-container"]}></div>
+          <div className={styles["left-container"]}>
+            <img src={beanWhite} alt="bean white" id="bean-logo" />
+            <img src={beanBrown} alt="bean white" id="bean-logo" />
+            <div>{JSON.stringify(mousePosition)}</div>
+          </div>
           <div className={styles["right-container"]}>
             <div className={styles["header"]}>
               <img src={logo} alt="logo" className={styles["logo"]} />

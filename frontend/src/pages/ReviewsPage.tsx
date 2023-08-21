@@ -85,7 +85,14 @@ function ReviewsPage() {
           </p>
         </div>
         <div
-          style={{ display: "flex", flex: 1, padding: "0px 50px", gap: "10px" }}
+          style={{
+            display: "flex",
+            flex: 1,
+            padding: "0px 50px",
+            gap: "10px",
+            width: "40%",
+            alignSelf: "center",
+          }}
         >
           <div className={styles["searchBar"]}>
             <input
@@ -120,11 +127,13 @@ function ReviewsPage() {
 
         {allReviews && (
           <div className={styles.reviewsContainer}>
-            {getSortedByCat(shownReviews, isSortedByDate, isSortedAsc).map(
-              (review) => (
-                <ReviewPost review={review} />
-              )
-            )}
+            <div className={styles["reviews-container-screen"]}>
+              {getSortedByCat(shownReviews, isSortedByDate, isSortedAsc).map(
+                (review) => (
+                  <ReviewPost review={review} />
+                )
+              )}
+            </div>
           </div>
         )}
       </div>

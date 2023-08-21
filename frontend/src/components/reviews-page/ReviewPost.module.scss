@@ -7,6 +7,12 @@
   display: flex;
   flex-direction: column;
   border: 1.5px solid #774a47;
+  cursor: pointer;
+  text-decoration: none;
+}
+.postContainer:hover {
+  transform: translateY(-10px);
+  transition: all 0.2s ease-in-out;
 }
 .img {
   width: 90%;

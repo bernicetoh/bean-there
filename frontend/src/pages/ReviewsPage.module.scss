@@ -52,26 +52,29 @@
   display: flex;
   padding: 26px 56px;
   flex: 1;
+}
+.reviews-container-screen {
   align-items: flex-start;
   align-content: flex-start;
   justify-content: flex-start;
   gap: 30px;
-  flex: 1 0 0;
+  // flex: 1;
+  width: max-content;
   align-self: stretch;
   flex-wrap: wrap;
+  display: flex;
 }
-
 .sortBtns {
   display: flex;
   border: 1.5px solid #704638;
   border-radius: 30px;
-  width: 150px;
+  width: max-content;
   align-items: center;
   height: 45px;
 
-  button {
+  .sortcat {
     background-color: transparent;
-    width: 115px;
+    width: 80px;
     height: 100%;
     border: none;
     color: #704638;
@@ -80,4 +83,15 @@
 
 .sortcat {
   padding: 10px;
+}
+
+.chevron {
+  background-color: transparent;
+  height: 100%;
+  border: none;
+  color: #704638;
+  justify-content: start;
+  display: flex;
+  align-items: center;
+  width: 50px;
 }

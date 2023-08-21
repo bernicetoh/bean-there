@@ -3,12 +3,21 @@ import styles from "./ReviewPost.module.scss";
 import star from "../../assets/star.svg";
 import coffeeImg from "../../assets/coffee.png";
 import { convertDate } from "../../utils/formattings";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 interface Props {
   review: Review;
 }
 function ReviewPost({ review }: Props) {
+  const location = useLocation();
+
   return (
-    <div className={styles.postContainer} key={review.id}>
+    <Link
+      to={`/reviews/${review.id}`}
+      className={styles.postContainer}
+      key={review.id}
+      state={{ previousLocation: location }}
+      // onClick={() => navigate(`/review/${review.id}`)}
+    >
       <div className={styles.img}>
         <img src={coffeeImg} alt="coffee" />
       </div>
@@ -29,7 +38,7 @@ function ReviewPost({ review }: Props) {
         <div className={styles.username}>Username1234</div>
         <div className={styles.date}>{convertDate(review.createdAt)}</div>
       </div>
-    </div>
+    </Link>
   );
 }
 

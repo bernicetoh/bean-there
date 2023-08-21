@@ -25,7 +25,7 @@ function AuthenticatedPage() {
         />
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         <motion.div
           key={selectedTab ? selectedTab : "empty"}
           initial={{ x: 0, opacity: 0 }}

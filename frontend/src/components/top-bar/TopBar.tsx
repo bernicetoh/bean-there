@@ -57,10 +57,10 @@ function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
       {isLoggedIn && <div></div>}
       {!isLoggedIn && (
         <div className={styles.authContainer}>
-          <Link to={"login"} className={styles.login}>
+          <Link to={"login"} className={styles.login} target="_blank">
             <div>Log in</div>
           </Link>
-          <Link to={"signup"} className={styles.signup}>
+          <Link to={"signup"} className={styles.signup} target="_blank">
             <div>Sign up</div>
           </Link>
         </div>
