@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import styles from "./LoginPage.module.scss";
-import { Link } from "react-router-dom";
-import { login } from "../services/authentication";
+import { Link, useNavigate } from "react-router-dom";
+import { getCurrentUser, login } from "../services/authentication";
 import logo from "../assets/bean-logo.svg";
 import beanWhite from "../assets/bean-white.svg";
 import beanBrown from "../assets/bean-brown.svg";
+import AuthContext from "../context/AuthProvider";
+import { UserDetails } from "../models/user.model";
+import Cookies from "js-cookie";
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const { setAuthState, authState } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
+  const brownBean = useRef<HTMLDivElement>(null);
   const useMousePosition = () => {
     const [mousePosition, setMousePosition] = React.useState({
       x: 0,
@@ -30,14 +37,18 @@ function LoginPage() {
 
     return mousePosition;
   };
+
   const mousePosition = useMousePosition();
+  useEffect(() => {
+    if (!brownBean.current) return;
+    brownBean.current.style.transform = `translateY${mousePosition.y} translateX${mousePosition.x}`;
+  }, [mousePosition]);
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     const error = invalidForm();
     if (error) {
       setErrMsg(error);
-
       resetForm();
       return;
     }
@@ -55,9 +66,14 @@ function LoginPage() {
 
   async function submitRequest() {
     try {
-      const user = await login(email, password);
-      console.log(user);
+      const res = await login(email, password);
+      const token = res.data.token;
+      Cookies.set("jwt", token, { httpOnly: true, secure: true });
+      const user = await getCurrentUser(token);
+      setAuthState({ userInfo: user, loggedIn: true });
       setErrMsg("");
+      setSuccess(true);
+      navigate("/home");
     } catch (e: any) {
       setErrMsg(e.response.data.message);
       // resetForm();
@@ -81,8 +97,20 @@ function LoginPage() {
         <div className={styles["login-card"]}>
           <div className={styles["left-container"]}>
             <img src={beanWhite} alt="bean white" id="bean-logo" />
-            <img src={beanBrown} alt="bean white" id="bean-logo" />
-            <div>{JSON.stringify(mousePosition)}</div>
+            <div
+              ref={brownBean}
+              style={{
+                top: `${mousePosition.y}px`,
+                left: `${mousePosition.x}px`,
+                position: "relative",
+              }}
+            >
+              {/* <img src={beanBrown} alt="bean white" id="bean-logo" /> */}
+            </div>
+
+            <div style={{ color: "black" }}>
+              {JSON.stringify(mousePosition)}
+            </div>
           </div>
           <div className={styles["right-container"]}>
             <div className={styles["header"]}>
@@ -111,7 +139,7 @@ function LoginPage() {
                 <input
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  type="text"
+                  type="password"
                   id="password"
                 />
               </div>
@@ -120,6 +148,7 @@ function LoginPage() {
               </button>
               <p className={styles["error"]}>{errMsg}</p>
             </form>
+            {success && <div>SUCCESS</div>}
             <div className={styles["no-acc"]}>
               <p>Don't have an account?</p>
               <Link to="/signup" className={styles["signup-link"]}>

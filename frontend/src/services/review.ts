@@ -4,9 +4,6 @@ export async function getAllReviews(
   queryName: string,
   abortSignal: AbortSignal
 ): Promise<Review[]> {
-  // page = 1,
-  // query: string
-  // abortSignal: AbortSignal
   try {
     const config = {
       params: { name: queryName },
@@ -25,5 +22,36 @@ export async function getAllReviews(
 export async function getReviewById(id: string): Promise<Review> {
   const res = await axios.get(`/reviews/${id}`);
   const parsedData: Review = res.data.data as Review;
+  return parsedData;
+}
+
+export async function createReview(
+  name: string,
+  location: string,
+  type: string,
+  price: number,
+  rating: number,
+  desc: string,
+  visitedOn: Date | null,
+  token: string,
+  userId: string
+): Promise<Review> {
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const res = await axios.post(
+    "/reviews",
+    {
+      name: name,
+      location: location,
+      coffeeType: type,
+      price: price,
+      rating: rating,
+      visitedAt: visitedOn,
+      user: userId,
+      desc: desc,
+    },
+    config
+  );
+  const parsedData = res.data.data as Review;
+  console.log(parsedData);
   return parsedData;
 }

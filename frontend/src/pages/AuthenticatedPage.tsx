@@ -18,7 +18,6 @@ function AuthenticatedPage() {
     <div>
       <div style={{ position: "sticky", top: 0 }}>
         <TopBar
-          isLoggedIn={false}
           setSelectedTab={setSelectedTab}
           selectedTab={selectedTab}
           tabs={tabs}

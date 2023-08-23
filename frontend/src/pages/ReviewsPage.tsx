@@ -5,6 +5,7 @@ import ReviewPost from "../components/reviews-page/ReviewPost";
 import styles from "./ReviewsPage.module.scss";
 import chevronDown from "../assets/chevron-down.svg";
 import searchLogo from "../assets/search.svg";
+import { motion } from "framer-motion";
 function ReviewsPage() {
   const [allReviews, setAllReviews] = useState<Review[]>([]);
   const [search, setSearch] = useState<string>("");
@@ -75,69 +76,77 @@ function ReviewsPage() {
   };
 
   return (
-    <div className={styles.reviewsScreen}>
-      <div className={styles.reviewsContent}>
-        <div className={styles["header"]}>
-          <h1>All Reviews</h1>
-          <p>
-            Discover the perfect cup through insights and recommendations from
-            our community.
-          </p>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            padding: "0px 50px",
-            gap: "10px",
-            width: "40%",
-            alignSelf: "center",
-          }}
-        >
-          <div className={styles["searchBar"]}>
-            <input
-              value={search}
-              onChange={handleChange}
-              placeholder="Enter a cafe name"
-            ></input>
-            <img src={searchLogo} alt="search" />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      style={{ height: "100%" }}
+    >
+      <div className={styles.reviewsScreen}>
+        <div className={styles.reviewsContent}>
+          <div className={styles["header"]}>
+            <h1>All Reviews</h1>
+            <p>
+              Discover the perfect cup through insights and recommendations from
+              our community.
+            </p>
           </div>
-          <div className={styles["sortBtns"]}>
-            <button
-              className={styles["sortcat"]}
-              onClick={() => setIsSortedByDate(!isSortedByDate)}
-            >
-              {isSortedByDate ? "Date" : "Rating"}
-            </button>
-            <button
-              className={styles["chevron"]}
-              onClick={() => setIsSortedAsc(!isSortedAsc)}
-            >
-              <img
-                src={chevronDown}
-                alt="chevron"
-                style={{
-                  transform: isSortedAsc ? "scaleY(-1)" : "",
-                  transition: "transform 150ms ease",
-                }}
-              />
-            </button>
-          </div>
-        </div>
-
-        {allReviews && (
-          <div className={styles.reviewsContainer}>
-            <div className={styles["reviews-container-screen"]}>
-              {getSortedByCat(shownReviews, isSortedByDate, isSortedAsc).map(
-                (review) => (
-                  <ReviewPost review={review} />
-                )
-              )}
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              padding: "0px 50px",
+              gap: "10px",
+              width: "40%",
+              alignSelf: "center",
+            }}
+          >
+            <div className={styles["searchBar"]}>
+              <input
+                value={search}
+                onChange={handleChange}
+                placeholder="Enter a cafe / restaurant / hawker name"
+              ></input>
+              <img src={searchLogo} alt="search" />
+            </div>
+            <div className={styles["sortBtns"]}>
+              <button
+                className={styles["sortcat"]}
+                onClick={() => setIsSortedByDate(!isSortedByDate)}
+              >
+                {isSortedByDate ? "Date" : "Rating"}
+              </button>
+              <button
+                className={styles["chevron"]}
+                onClick={() => setIsSortedAsc(!isSortedAsc)}
+              >
+                <img
+                  src={chevronDown}
+                  alt="chevron"
+                  style={{
+                    transform: isSortedAsc ? "scaleY(-1)" : "",
+                    transition: "transform 150ms ease",
+                  }}
+                />
+              </button>
             </div>
           </div>
-        )}
+
+          {allReviews && (
+            <div className={styles.reviewsContainer}>
+              <div className={styles["reviews-container-screen"]}>
+                {getSortedByCat(shownReviews, isSortedByDate, isSortedAsc).map(
+                  (review) => (
+                    <ReviewPost review={review} />
+                  )
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

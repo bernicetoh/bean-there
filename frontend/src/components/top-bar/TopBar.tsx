@@ -1,18 +1,21 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import styles from "./TopBar.module.scss";
 import logo from "../../assets/bean-outline.svg";
 import chevronDown from "../../assets/chevron-down.svg";
 import { motion } from "framer-motion";
 import { AuthMode } from "../../pages/AuthenticatedPage";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthProvider";
 interface Props {
-  isLoggedIn: boolean;
   setSelectedTab: Dispatch<SetStateAction<AuthMode>>;
   selectedTab: AuthMode;
   tabs: Array<AuthMode>;
 }
 
-function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
+function TopBar({ setSelectedTab, selectedTab, tabs }: Props) {
+  const { authState } = useContext(AuthContext);
+  const { loggedIn, userInfo } = authState;
+
   return (
     <div className={styles.topbarContainer}>
       <Link className={styles.logoImg} to={"/"}>
@@ -28,7 +31,9 @@ function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
                   ? `${styles["selected"]} ${styles[item]}`
                   : styles["unselected"]
               }
-              onClick={() => setSelectedTab(item)}
+              onClick={() => {
+                setSelectedTab(item);
+              }}
             >
               {item === selectedTab && (
                 <motion.div
@@ -54,8 +59,14 @@ function TopBar({ isLoggedIn, setSelectedTab, selectedTab, tabs }: Props) {
           </div>
         ))}
       </div>
-      {isLoggedIn && <div></div>}
-      {!isLoggedIn && (
+      {true && (
+        <div className={styles["profile"]}>
+          <button>
+            <p>bernicetoh</p>
+          </button>
+        </div>
+      )}
+      {false && (
         <div className={styles.authContainer}>
           <Link to={"login"} className={styles.login} target="_blank">
             <div>Log in</div>

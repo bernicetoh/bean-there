@@ -27,13 +27,15 @@ function ReviewFull() {
         <div className={styles["review-container"]}>
           <div className={styles["left-container"]}>
             <div className={styles["left-container-content"]}>
-              <Link to={"/"} className={styles["back"]}>
+              <Link to={"/reviews"} className={styles["back"]}>
                 <img src={chevronDown} alt="back" />
               </Link>
               <div className={styles["review-details"]}>
                 <div className={styles["name"]}>{review.name}</div>
                 <div className={styles["location"]}>{review.location}</div>
-                <div>Visited on: {convertDate(review.visitedAt)}</div>
+                {review.visitedAt && (
+                  <div>Visited on: {convertDate(review.visitedAt)}</div>
+                )}
                 <div>{review.description}</div>
               </div>
             </div>
