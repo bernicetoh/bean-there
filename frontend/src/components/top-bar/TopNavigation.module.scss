@@ -1,15 +1,20 @@
 .top-bar {
   display: flex;
   padding: 10px 20px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 71px;
-  border-radius: 30px;
   background: transparent;
-  position: relative;
+  position: sticky;
+  top: 0;
+  height: 80px;
+}
+nav {
+  position: absolute;
 }
 nav ul {
   display: flex;
+  padding-inline-start: 0px;
+
   //   flex-direction: s;
 }
 
@@ -60,8 +65,14 @@ nav li {
   justify-content: flex-end;
   align-items: center;
   gap: 25px;
+  position: absolute;
+  right: 20px;
 }
 
+.logoImg {
+  position: absolute;
+  left: 20px;
+}
 .login {
   color: #704638;
   font-size: 16px;
