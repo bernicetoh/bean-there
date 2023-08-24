@@ -22,6 +22,8 @@ mongoose
 const reviews = JSON.parse(
   fs.readFileSync(`${__dirname}/reviews.json`, "utf-8")
 );
+
+// to run : `node dev-data/data/import-dev-data.js --import`
 const importData = async () => {
   try {
     await Review.create(reviews);
@@ -34,7 +36,7 @@ const importData = async () => {
 
 const deleteData = async () => {
   try {
-    await Tour.deleteMany();
+    await Review.deleteMany();
     console.log("Data successfully deleted");
     process.exit();
   } catch (err) {

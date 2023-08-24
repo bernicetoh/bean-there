@@ -18,7 +18,8 @@ const reviewSchema = new mongoose.Schema(
       required: [true, "A review must include a coffee type"],
     },
     price: {
-      type: Number,
+      type: String,
+      enum: ["low", "medium", "high"],
       required: [true, "A review must include a price of the coffee purchased"],
     },
     description: {
