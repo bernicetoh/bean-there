@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getAllReviews } from "./services/review";
-import { Review } from "./models/review.model";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ReviewsPage from "./pages/ReviewsPage";
-import AuthenticatedPage from "./pages/AuthenticatedPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ReviewFull from "./components/reviews-page/ReviewFull";
@@ -12,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import TopNavigation from "./components/top-bar/TopNavigation";
 import { AnimatePresence } from "framer-motion";
 import LocatePage from "./pages/LocatePage";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   const location = useLocation();
@@ -19,17 +16,14 @@ function App() {
   return (
     <div>
       <AnimatePresence mode="wait">
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+        <Routes location={previousLocation || location}>
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/" element={<TopNavigation />}>
+            <Route path="reviews" element={<ReviewsPage />} />
+            <Route path="home" element={<HomePage />} />
+            <Route path="locate" element={<LocatePage />} />
+          </Route>
         </Routes>
-        <TopNavigation>
-          <Routes location={previousLocation || location}>
-            <Route path="/reviews" element={<ReviewsPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/locate" element={<LocatePage />} />
-          </Routes>
-        </TopNavigation>
 
         {previousLocation && (
           <Routes>

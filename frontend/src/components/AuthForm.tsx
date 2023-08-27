@@ -1,17 +1,22 @@
-import React from "react";
-import { AuthMode } from "../pages/AuthenticatedPage";
+import React, { Dispatch, SetStateAction } from "react";
 import ReviewsPage from "../pages/ReviewsPage";
 import HomePage from "../pages/HomePage";
+import SignupPage from "../pages/SignupPage";
+import LoginPage from "../pages/LoginPage";
 
 interface Props {
   mode: string;
+  setMode: Dispatch<SetStateAction<string>>;
 }
-function AuthForm({ mode }: Props) {
+function AuthForm({ mode, setMode }: Props) {
   return (
     <React.Fragment>
       <div style={{ height: "100%" }}>
-        {mode === AuthMode.REVIEWS && <ReviewsPage />}
-        {mode === AuthMode.HOME && <HomePage />}
+        {mode === "Login" ? (
+          <LoginPage setMode={setMode} />
+        ) : (
+          <SignupPage setMode={setMode} />
+        )}
       </div>
     </React.Fragment>
   );

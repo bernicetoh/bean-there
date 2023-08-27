@@ -22,8 +22,7 @@ export async function signup(
   email: string,
   password: string,
   repassword: string,
-  username: string,
-  role: string
+  username: string
 ) {
   return await axios.post("/users/signup", {
     name: name,
@@ -31,7 +30,6 @@ export async function signup(
     password: password,
     confirmPassword: repassword,
     username: username,
-    role: role,
   });
 }
 

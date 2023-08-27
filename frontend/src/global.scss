@@ -23,6 +23,11 @@ a,
 div {
   // color: black;
 }
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
 #root {
   height: 100%;
   width: 100%;

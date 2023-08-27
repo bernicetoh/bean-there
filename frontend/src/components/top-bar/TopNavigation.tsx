@@ -1,5 +1,12 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
-import { Link, useMatch, useNavigate, useResolvedPath } from "react-router-dom";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useMatch,
+  useNavigate,
+  useResolvedPath,
+} from "react-router-dom";
 import styles from "./TopNavigation.module.scss";
 import logo from "../../assets/bean-outline.svg";
 
@@ -7,11 +14,14 @@ import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { UserDetails } from "../../models/user.model";
 import { logout } from "../../services/authentication";
+import { relative } from "path";
 interface Props {
   children: ReactNode;
 }
-export default function TopNavigation({ children }: Props) {
+export default function TopNavigation() {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname);
   const [user, SetUser] = useState<UserDetails | null>(null);
 
   useEffect(() => {
@@ -32,10 +42,11 @@ export default function TopNavigation({ children }: Props) {
     await logout();
     localStorage.clear();
     Cookies.remove("token");
-    navigate("/login");
+    navigate("/auth");
   };
+
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <div className={styles["top-bar"]}>
         <Link className={styles.logoImg} to={"/"}>
           <img src={logo} alt="logo" />
@@ -59,17 +70,27 @@ export default function TopNavigation({ children }: Props) {
         )}
         {!Cookies.get("token") && (
           <div className={styles["auth-container"]}>
-            <Link to={"login"} className={styles.login} target="_blank">
+            <Link
+              to={"auth"}
+              className={styles.login}
+              // target="_blank"
+              state={{ isRegister: false }}
+            >
               <div>Log in</div>
             </Link>
-            <Link to={"signup"} className={styles.signup} target="_blank">
+            <Link
+              to={"auth"}
+              className={styles.signup}
+              // target="_blank"
+              state={{ isRegister: true }}
+            >
               <div>Sign up</div>
             </Link>
           </div>
         )}
       </div>
 
-      {children}
+      <Outlet />
     </div>
   );
 }
@@ -89,16 +110,12 @@ function CustomLink({ to, children }: CustomLinkProps) {
           layoutId="underline"
           style={{
             borderBottom: "1.5px solid #704638",
-            // justifyContent: "center",
             display: "flex",
             width: "50%",
             alignSelf: "center",
-            // alignItems: "center",
-            // backgroundColor: "#977c5a",
             position: "absolute",
             inset: 0,
             margin: "0 auto",
-            // borderRadius: 20,
           }}
         />
       )}
