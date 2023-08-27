@@ -19,7 +19,7 @@ const createSendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+  cookieOptions.secure = true;
   res.cookie("jwt", token, cookieOptions);
   res.status(statusCode).json({
     status: "success",
@@ -58,6 +58,14 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   createSendToken(user, 200, res);
 });
+
+exports.logout = (req, res) => {
+  res.cookie("jwt", "loggedout", {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: "success" });
+};
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
   // get user from collection
