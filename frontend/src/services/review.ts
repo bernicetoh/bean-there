@@ -29,7 +29,7 @@ export async function createReview(
   name: string,
   location: string,
   type: string,
-  price: number,
+  price: string,
   rating: number,
   desc: string,
   visitedOn: Date | null,

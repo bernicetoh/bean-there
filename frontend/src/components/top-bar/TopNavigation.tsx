@@ -1,18 +1,41 @@
-import { ReactNode, useContext } from "react";
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import { ReactNode, useContext, useEffect, useState } from "react";
+import { Link, useMatch, useNavigate, useResolvedPath } from "react-router-dom";
 import styles from "./TopNavigation.module.scss";
 import logo from "../../assets/bean-outline.svg";
 
 import { motion } from "framer-motion";
-import AuthContext from "../../context/AuthProvider";
+import Cookies from "js-cookie";
+import { UserDetails } from "../../models/user.model";
+import { logout } from "../../services/authentication";
 interface Props {
   children: ReactNode;
 }
 export default function TopNavigation({ children }: Props) {
-  const { authState } = useContext(AuthContext);
-  const { loggedIn, userInfo } = authState;
+  const navigate = useNavigate();
+  const [user, SetUser] = useState<UserDetails | null>(null);
+
+  useEffect(() => {
+    const getUserFromLocal = () => {
+      const userStringify = localStorage.getItem("user");
+      if (!userStringify) {
+        return;
+      } else {
+        const user = JSON.parse(userStringify);
+        console.log(user);
+        return user;
+      }
+    };
+    SetUser(getUserFromLocal());
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    await logout();
+    localStorage.clear();
+    Cookies.remove("token");
+    navigate("/login");
+  };
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <div className={styles["top-bar"]}>
         <Link className={styles.logoImg} to={"/"}>
           <img src={logo} alt="logo" />
@@ -24,14 +47,17 @@ export default function TopNavigation({ children }: Props) {
             <CustomLink to="/locate">Locate</CustomLink>
           </ul>
         </nav>
-        {loggedIn && (
-          <div className={styles["profile"]}>
-            <button>
-              <p>{userInfo.username}</p>
+        {Cookies.get("token") && user && (
+          <div className={styles["auth-container"]}>
+            <button className={styles["profile"]}>
+              <p>{user.username}</p>
+            </button>
+            <button onClick={() => handleLogout()} className={styles["logout"]}>
+              <div>Log out</div>
             </button>
           </div>
         )}
-        {!loggedIn && (
+        {!Cookies.get("token") && (
           <div className={styles["auth-container"]}>
             <Link to={"login"} className={styles.login} target="_blank">
               <div>Log in</div>

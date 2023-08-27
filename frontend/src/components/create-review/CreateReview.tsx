@@ -4,42 +4,36 @@ import AuthContext from "../../context/AuthProvider";
 import { createReview } from "../../services/review";
 import Cookies from "js-cookie";
 import StarRating from "../form/star-rating/StarRating";
+import PriceRating from "../form/price/PriceRating";
 function CreateReview() {
   const [name, setName] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [type, setType] = useState<string>("");
-  const [price, setPrice] = useState<number>(0);
-  const [rating, setRating] = useState<number>(0);
+  const [price, setPrice] = useState<string>("low");
+  const [rating, setRating] = useState<number>(1);
   const [visitedOn, setVisitedOn] = useState<Date | null>(null);
   const [desc, setDesc] = useState<string>("");
   const [errMsg, setErrMsg] = useState("");
   const { authState } = useContext(AuthContext);
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
-    // const error = invalidForm();
-    // if (error) {
-    //   setErrMsg(error);
-
-    //   resetForm();
-    //   return;
-    // }
     try {
+      console.log("trying");
       submitRequest();
       return true;
     } catch (e: any) {
       alert(e.message);
       setErrMsg("Something went wrong. Please try again later.");
-
-      // resetForm();
     }
     return;
   }
 
   async function submitRequest() {
     try {
-      const user = authState.userInfo;
-      const jwt = Cookies.get("jwt");
-      if (!jwt) return;
+      const userStringify = localStorage.getItem("user");
+      if (!userStringify) return;
+      const user = JSON.parse(userStringify);
+      const jwt = Cookies.get("token");
       const review = await createReview(
         name,
         location,
@@ -55,15 +49,9 @@ function CreateReview() {
       setErrMsg("");
     } catch (e: any) {
       setErrMsg(e.response.data.message);
-      // resetForm();
+      resetForm();
     }
   }
-
-  // function invalidForm() {
-  //   if (!email || !password) {
-  //     return "Please fill out all fields";
-  //   }
-  // }
 
   function resetForm() {
     setName("");
@@ -81,10 +69,14 @@ function CreateReview() {
         }}
       >
         <StarRating rating={rating} setRating={setRating} />
+        <div className={styles["price-input-box"]}>
+          <label>Price:</label>
+          <PriceRating rating={price} setRating={setPrice} />
+        </div>
         <div className={styles["input-pairs"]}>
           <div className={styles["input-box"]}>
             <label>Name of Cafe / Restaurant / Hawker:</label>
-            <input onChange={(e) => setName(e.target.value)} />
+            <input onChange={(e) => setName(e.target.value)} value={name} />
           </div>
           <div className={styles["input-box"]}>
             <label>Location:</label>
@@ -98,18 +90,11 @@ function CreateReview() {
             <input onChange={(e) => setType(e.target.value)} />
           </div>
           <div className={styles["input-box"]}>
-            <label>Price:</label>
-            <input
-              type="number"
-              onChange={(e) => setPrice(e.target.valueAsNumber)}
-            />
+            <label>Visited on:</label>
+            <input onChange={(e) => setVisitedOn(e.target.valueAsDate)} />
           </div>
         </div>
 
-        <div className={styles["input-box"]}>
-          <label>Visited on:</label>
-          <input onChange={(e) => setVisitedOn(e.target.valueAsDate)} />
-        </div>
         <div className={styles["desc-input-box"]}>
           <label>Description:</label>
           <textarea onChange={(e) => setDesc(e.target.value)} />

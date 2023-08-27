@@ -11,38 +11,39 @@ import { Modal } from "./components/modal/Modal";
 import HomePage from "./pages/HomePage";
 import TopNavigation from "./components/top-bar/TopNavigation";
 import { AnimatePresence } from "framer-motion";
+import LocatePage from "./pages/LocatePage";
 
 function App() {
   const location = useLocation();
   const previousLocation = location.state?.previousLocation;
   return (
     <div>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-      </Routes>
-      <TopNavigation>
-        <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+        </Routes>
+        <TopNavigation>
           <Routes location={previousLocation || location}>
             <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/home" element={<HomePage />} />
-            {/* <Route path="/" element={<AuthenticatedPage />} /> */}
+            <Route path="/locate" element={<LocatePage />} />
           </Routes>
-        </AnimatePresence>
-      </TopNavigation>
+        </TopNavigation>
 
-      {previousLocation && (
-        <Routes>
-          <Route
-            path="/reviews/:postId"
-            element={
-              <Modal>
-                <ReviewFull />
-              </Modal>
-            }
-          />
-        </Routes>
-      )}
+        {previousLocation && (
+          <Routes>
+            <Route
+              path="/reviews/:postId"
+              element={
+                <Modal>
+                  <ReviewFull />
+                </Modal>
+              }
+            />
+          </Routes>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

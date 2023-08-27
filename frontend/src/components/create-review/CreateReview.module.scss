@@ -39,6 +39,17 @@
   }
 }
 
+.price-input-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex: 1;
+
+  label {
+    color: #704638;
+  }
+}
+
 .desc-input-box {
   textarea {
     font-family: "Abyssinica SIL", serif;

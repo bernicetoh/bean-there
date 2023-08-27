@@ -4,6 +4,7 @@ import { UserDetails } from "../models/user.model";
 interface AuthState {
   userInfo: UserDetails;
   loggedIn: boolean;
+  jwt: string;
 }
 
 export interface AuthContextProps {
@@ -30,6 +31,7 @@ export const AuthProvider = ({ children }: Props) => {
       _id: "",
     },
     loggedIn: false,
+    jwt: "",
   });
 
   return <Provider value={{ authState, setAuthState }}>{children}</Provider>;

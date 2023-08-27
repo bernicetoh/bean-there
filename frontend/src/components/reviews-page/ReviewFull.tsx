@@ -51,9 +51,26 @@ function ReviewFull() {
               <img src={lungo} alt="lungo" />
               <div>{review.coffeeType}</div>
             </div>
-            <div className={styles["rating"]}>
-              <img src={dollar} alt="dollar" />
-              <div>${review.price}</div>
+            <div className={styles["price"]}>
+              {review.price === "low" && (
+                <div className={styles["price-img"]}>
+                  <img src={dollar} alt="dollar" />{" "}
+                </div>
+              )}
+              {review.price === "medium" && (
+                <div className={styles["price-img"]}>
+                  <img src={dollar} alt="dollar" />{" "}
+                  <img src={dollar} alt="dollar" />{" "}
+                </div>
+              )}
+              {review.price === "high" && (
+                <div className={styles["price-img"]}>
+                  <img src={dollar} alt="dollar" />{" "}
+                  <img src={dollar} alt="dollar" />{" "}
+                  <img src={dollar} alt="dollar" />{" "}
+                </div>
+              )}
+              <div>Price</div>
             </div>
           </div>
         </div>

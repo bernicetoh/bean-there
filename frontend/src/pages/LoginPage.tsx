@@ -8,14 +8,13 @@ import beanBrown from "../assets/bean-brown.svg";
 import AuthContext from "../context/AuthProvider";
 import { UserDetails } from "../models/user.model";
 import Cookies from "js-cookie";
-
+import { motion } from "framer-motion";
 function LoginPage() {
   const navigate = useNavigate();
   const { setAuthState, authState } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
   const brownBean = useRef<HTMLDivElement>(null);
   const useMousePosition = () => {
     const [mousePosition, setMousePosition] = React.useState({
@@ -68,11 +67,16 @@ function LoginPage() {
     try {
       const res = await login(email, password);
       const token = res.data.token;
-      Cookies.set("jwt", token, { httpOnly: true, secure: true });
+      console.log(token);
+
       const user = await getCurrentUser(token);
-      setAuthState({ userInfo: user, loggedIn: true });
+      setAuthState({ userInfo: user, loggedIn: true, jwt: token });
+      Cookies.set("token", token, {
+        expires: 7,
+      });
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log(localStorage);
       setErrMsg("");
-      setSuccess(true);
       navigate("/home");
     } catch (e: any) {
       setErrMsg(e.response.data.message);
@@ -112,49 +116,57 @@ function LoginPage() {
               {JSON.stringify(mousePosition)}
             </div>
           </div>
-          <div className={styles["right-container"]}>
-            <div className={styles["header"]}>
-              <img src={logo} alt="logo" className={styles["logo"]} />
-              <h1>Welcome back!</h1>
-              <p>Please enter your details</p>
-            </div>
 
-            <form
-              className={styles["form"]}
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
+          <div className={styles["right-container"]}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{ height: "100%", width: "100%" }}
             >
-              <div className={styles["input-box"]}>
-                <label>Email</label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="text"
-                  id="email"
-                />
+              <div className={styles["header"]}>
+                <img src={logo} alt="logo" className={styles["logo"]} />
+                <h1>Welcome back!</h1>
+                <p>Please enter your details</p>
               </div>
-              <div className={styles["input-box"]}>
-                <label>Password</label>
-                <input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                  id="password"
-                />
+
+              <form
+                className={styles["form"]}
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+              >
+                <div className={styles["input-box"]}>
+                  <label>Email</label>
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    id="email"
+                  />
+                </div>
+                <div className={styles["input-box"]}>
+                  <label>Password</label>
+                  <input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    id="password"
+                  />
+                </div>
+                <button type="submit" className={styles["login"]}>
+                  Log in
+                </button>
+                <p className={styles["error"]}>{errMsg}</p>
+              </form>
+              <div className={styles["no-acc"]}>
+                <p>Don't have an account?</p>
+                <Link to="/signup" className={styles["signup-link"]}>
+                  Sign up
+                </Link>
               </div>
-              <button type="submit" className={styles["login"]}>
-                Log in
-              </button>
-              <p className={styles["error"]}>{errMsg}</p>
-            </form>
-            {success && <div>SUCCESS</div>}
-            <div className={styles["no-acc"]}>
-              <p>Don't have an account?</p>
-              <Link to="/signup" className={styles["signup-link"]}>
-                Sign up
-              </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

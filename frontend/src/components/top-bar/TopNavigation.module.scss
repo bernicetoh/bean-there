@@ -59,6 +59,10 @@ nav li {
   color: #977c5a;
 }
 
+.profile {
+  position: absolute;
+  right: 20px;
+}
 .auth-container {
   display: flex;
   padding: 11px 14px 12px 30px;
@@ -72,6 +76,27 @@ nav li {
 .logoImg {
   position: absolute;
   left: 20px;
+}
+.logout {
+  cursor: pointer;
+  background-color: transparent;
+  width: 115px;
+  height: 35px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  // background: #704638;
+  border: 1.5px solid #704638;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  div {
+    color: #704638;
+  }
 }
 .login {
   color: #704638;
@@ -104,16 +129,15 @@ nav li {
 }
 
 .profile {
+  position: relative;
   display: flex;
   padding: 11px 14px 12px 30px;
   align-items: center;
-  button {
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    font-weight: 800;
-    font-family: "Abyssinica SIL", serif;
-    font-family: "Rubik", sans-serif;
-    color: #704638;
-  }
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: "Abyssinica SIL", serif;
+  font-family: "Rubik", sans-serif;
+  color: #704638;
 }
