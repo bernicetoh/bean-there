@@ -2,6 +2,7 @@
   background-color: #704638;
   height: 100vh;
   width: 100vw;
+  transform: rotate;
 }
 
 .signup-content {
@@ -99,11 +100,16 @@ input:focus {
   justify-content: center;
   font-weight: 600;
   margin-top: 10px;
+  transition: ease-in-out 0.2s;
+
   button {
     border: 1.5px solid #704638;
   }
 }
-
+.signup:hover {
+  background-color: #704638;
+  color: white;
+}
 .no-acc {
   display: flex;
   align-items: center;

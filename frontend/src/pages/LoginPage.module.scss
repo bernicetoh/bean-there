@@ -4,6 +4,16 @@
   width: 100vw;
 }
 
+.moving-logo {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 1000 / 556;
+  user-select: none;
+}
+.moving-logo > img {
+  position: absolute;
+  width: 100%;
+}
 .login-content {
   width: 100%;
   height: 100%;
@@ -98,10 +108,19 @@ input:focus {
   font-weight: 600;
   margin-top: 10px;
   cursor: pointer;
+  transition: ease-in-out 0.2s;
 
   button {
     border: 1.5px solid #704638;
   }
+}
+.login:hover {
+  background-color: #704638;
+  color: white;
+}
+
+.moving-img {
+  transition: ease-out 0.2s;
 }
 
 .no-acc {
