@@ -35,7 +35,7 @@ function ReviewPost({ review }: Props) {
             <img src={star} alt="star" />
           </div>
         </div>
-        <div className={styles.username}>Username1234</div>
+        <div className={styles.username}>{review.user.username}</div>
         <div className={styles.date}>{convertDate(review.createdAt)}</div>
       </div>
     </Link>

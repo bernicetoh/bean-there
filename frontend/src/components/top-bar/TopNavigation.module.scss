@@ -53,6 +53,7 @@ nav li {
 .link {
   text-decoration: none;
   color: #704638;
+  transition: ease-in-out 0.2s;
 }
 
 .link:hover {
@@ -94,8 +95,16 @@ nav li {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  transition: ease-in-out 0.2s;
   div {
     color: #704638;
+  }
+}
+
+.logout:hover {
+  background-color: #704638;
+  div {
+    color: white;
   }
 }
 .login {

@@ -5,7 +5,9 @@ import { createReview } from "../../services/review";
 import Cookies from "js-cookie";
 import StarRating from "../form/star-rating/StarRating";
 import PriceRating from "../form/price/PriceRating";
+import { useNavigate } from "react-router-dom";
 function CreateReview() {
+  const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [type, setType] = useState<string>("");
@@ -15,6 +17,7 @@ function CreateReview() {
   const [desc, setDesc] = useState<string>("");
   const [errMsg, setErrMsg] = useState("");
   const { authState } = useContext(AuthContext);
+
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     try {
@@ -45,8 +48,8 @@ function CreateReview() {
         jwt,
         user._id
       );
-      console.log(review);
       setErrMsg("");
+      navigate("/reviews");
     } catch (e: any) {
       setErrMsg(e.response.data.message);
       resetForm();

@@ -84,4 +84,9 @@
   border-radius: 30px;
   padding: 5px 5px 5px 20px;
   border: 2px solid #704638;
+  transition: ease-in-out 0.2s;
+}
+.submit:hover {
+  background-color: #704638;
+  color: white;
 }
