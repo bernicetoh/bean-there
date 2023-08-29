@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./CreateReview.module.scss";
 import AuthContext from "../../context/AuthProvider";
 import { createReview } from "../../services/review";
@@ -6,22 +6,30 @@ import Cookies from "js-cookie";
 import StarRating from "../form/star-rating/StarRating";
 import PriceRating from "../form/price/PriceRating";
 import { useNavigate } from "react-router-dom";
-function CreateReview() {
-  const navigate = useNavigate();
-  const [name, setName] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
+import LocationSelectInput from "../input/LocationSelectInput";
+import { Location } from "../../models/location.model";
+
+interface Props {
+  setIsCreate: Dispatch<SetStateAction<boolean>>;
+}
+function CreateReview({ setIsCreate }: Props) {
+  const [title, setTitle] = useState<string>("");
+  const [location, setLocation] = useState<Location | null>(null);
   const [type, setType] = useState<string>("");
   const [price, setPrice] = useState<string>("low");
   const [rating, setRating] = useState<number>(1);
   const [visitedOn, setVisitedOn] = useState<Date | null>(null);
   const [desc, setDesc] = useState<string>("");
   const [errMsg, setErrMsg] = useState("");
-  const { authState } = useContext(AuthContext);
 
   function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
+    const error = invalidForm();
+    if (error) {
+      setErrMsg(error);
+      return;
+    }
     try {
-      console.log("trying");
       submitRequest();
       return true;
     } catch (e: any) {
@@ -34,12 +42,14 @@ function CreateReview() {
   async function submitRequest() {
     try {
       const userStringify = localStorage.getItem("user");
-      if (!userStringify) return;
+      if (!userStringify || !location) return;
       const user = JSON.parse(userStringify);
       const jwt = Cookies.get("token");
-      const review = await createReview(
-        name,
-        location,
+      await createReview(
+        title,
+        location.geometry.coordinates,
+        location.properties.name,
+        location.properties.address_line2,
         type,
         price,
         rating,
@@ -49,7 +59,7 @@ function CreateReview() {
         user._id
       );
       setErrMsg("");
-      navigate("/reviews");
+      setIsCreate(false);
     } catch (e: any) {
       setErrMsg(e.response.data.message);
       resetForm();
@@ -57,9 +67,14 @@ function CreateReview() {
   }
 
   function resetForm() {
-    setName("");
+    setTitle("");
     setDesc("");
   }
+
+  function invalidForm() {
+    if (!location) return "Please select a location";
+  }
+
   return (
     <div className={styles["create-review"]}>
       <div className={styles["header"]}>
@@ -78,12 +93,16 @@ function CreateReview() {
         </div>
         <div className={styles["input-pairs"]}>
           <div className={styles["input-box"]}>
-            <label>Name of Cafe / Restaurant / Hawker:</label>
-            <input onChange={(e) => setName(e.target.value)} value={name} />
+            <label>Review title:</label>
+            <input onChange={(e) => setTitle(e.target.value)} value={title} />
           </div>
           <div className={styles["input-box"]}>
             <label>Location:</label>
-            <input onChange={(e) => setLocation(e.target.value)} />
+            {/* <input onChange={(e) => setLocation(e.target.value)} /> */}
+            <LocationSelectInput
+              selectedLocation={location}
+              setSelectedLocation={setLocation}
+            />
           </div>
         </div>
 

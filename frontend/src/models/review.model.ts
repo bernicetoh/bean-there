@@ -1,8 +1,9 @@
 import { ReviewUserDetails } from "./user.model";
 
 export interface Review {
-  name: string;
-  location: string;
+  title: string;
+  locationCoord: [number, number];
+  locationAddress: string;
   id: number;
   coffeeType: string;
   price: string;
@@ -13,3 +14,4 @@ export interface Review {
   createdAt: Date;
   user: ReviewUserDetails;
 }
+// "64e41ff1699ed66428b34c2f"

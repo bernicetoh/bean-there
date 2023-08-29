@@ -31,8 +31,10 @@ function ReviewFull() {
                 <img src={chevronDown} alt="back" />
               </Link>
               <div className={styles["review-details"]}>
-                <div className={styles["name"]}>{review.name}</div>
-                <div className={styles["location"]}>{review.location}</div>
+                <div className={styles["name"]}>{review.title}</div>
+                <div className={styles["location"]}>
+                  {review.locationAddress}
+                </div>
                 {review.visitedAt && (
                   <div>Visited on: {convertDate(review.visitedAt)}</div>
                 )}

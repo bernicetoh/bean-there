@@ -114,6 +114,7 @@ nav li {
   font-weight: 500;
   line-height: normal;
   text-decoration: none;
+  transition: ease-in-out 0.2s;
 }
 
 .signup {
@@ -132,11 +133,22 @@ nav li {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  transition: ease-in-out 0.2s;
   div {
     color: #704638;
   }
 }
 
+.signup:hover {
+  background-color: #704638;
+  div {
+    color: white;
+  }
+}
+
+.login:hover {
+  color: #977c5a;
+}
 .profile {
   position: relative;
   display: flex;

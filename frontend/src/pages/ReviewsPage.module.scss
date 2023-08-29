@@ -10,13 +10,42 @@
   flex-direction: column;
 }
 
+.create-btn {
+  display: flex;
+  border: 1.5px solid #704638;
+  border-radius: 30px;
+  width: max-content;
+  align-items: center;
+  height: 48px;
+  justify-content: center;
+  padding: 0px 20px;
+  transition: ease-in-out 0.2s;
+  img {
+    width: 50%;
+    height: 50%;
+  }
+}
+.active {
+  background-color: #704638;
+  img {
+    filter: invert(100%) sepia(0%) saturate(24%) hue-rotate(114deg)
+      brightness(108%) contrast(108%);
+  }
+}
+
+.create-btn:hover {
+  background: #704638;
+  img {
+    filter: invert(100%) sepia(0%) saturate(24%) hue-rotate(114deg)
+      brightness(108%) contrast(108%);
+  }
+}
 .searchBar {
   display: flex;
   border: 1.5px solid grey;
   border-radius: 30px;
   height: 45px;
   background-color: white;
-
   flex: 1;
   input {
     background-color: transparent;
@@ -25,6 +54,7 @@
     flex: 1;
     padding: 5px 5px 5px 20px;
   }
+
   img {
     border-radius: 100%;
     background-color: #704638;

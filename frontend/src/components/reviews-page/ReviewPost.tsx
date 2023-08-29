@@ -29,7 +29,7 @@ function ReviewPost({ review }: Props) {
             justifyContent: "space-between",
           }}
         >
-          <div className={styles.reviewName}>{review.name}</div>
+          <div className={styles.reviewName}>{review.title}</div>
           <div className={styles.reviewRating}>
             {review.rating}
             <img src={star} alt="star" />

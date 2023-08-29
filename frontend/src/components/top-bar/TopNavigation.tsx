@@ -48,7 +48,7 @@ export default function TopNavigation() {
   return (
     <div>
       <div className={styles["top-bar"]}>
-        <Link className={styles.logoImg} to={"/"}>
+        <Link className={styles.logoImg} to={"/home"}>
           <img src={logo} alt="logo" />
         </Link>
         <nav className="nav">

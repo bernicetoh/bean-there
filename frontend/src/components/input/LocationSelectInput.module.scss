@@ -1,0 +1,49 @@
+.location-input {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.scroll {
+  max-height: 200px;
+  overflow-y: scroll;
+  position: absolute;
+  width: 100%;
+  margin-top: 32px;
+  // display: none;
+  z-index: 200;
+  border: 1px solid #704638;
+}
+
+.location-row {
+  background-color: white;
+  display: flex;
+  flex: 1;
+  height: 30px;
+  transition: ease-in-out 0.2s;
+  align-items: center;
+  padding: 5px;
+  z-index: 200;
+  cursor: pointer;
+  div {
+    z-index: 0;
+    color: #704638;
+  }
+}
+
+.location-row:hover {
+  background-color: #704638;
+  div {
+    color: white;
+  }
+}
+
+.input {
+  width: 100%;
+}
+
+// .input:not(:focus) + .scroll {
+//   display:; // Show the scroll class when the input is in focus
+//   //   z-index: 1;
+// }

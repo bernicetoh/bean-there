@@ -84,7 +84,7 @@ function HomePage() {
           </motion.div>
         </div>
 
-        <button onClick={() => setIsCreate(!isCreate)}>Create Review!</button>
+        {/* <button onClick={() => setIsCreate(!isCreate)}>Create Review!</button>
         {isCreate && (
           <AnimatePresence mode="wait">
             <motion.div
@@ -97,7 +97,7 @@ function HomePage() {
               <CreateReview />
             </motion.div>
           </AnimatePresence>
-        )}
+        )} */}
       </div>
     </motion.div>
   );

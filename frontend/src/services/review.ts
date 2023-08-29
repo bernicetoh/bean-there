@@ -26,8 +26,10 @@ export async function getReviewById(id: string): Promise<Review> {
 }
 
 export async function createReview(
-  name: string,
-  location: string,
+  title: string,
+  location_coords: number[],
+  location_name: string,
+  location_address: string,
   type: string,
   price: string,
   rating: number,
@@ -40,14 +42,17 @@ export async function createReview(
   const res = await axios.post(
     "/reviews",
     {
-      name: name,
-      location: location,
+      title: title,
+      locationAddress: location_address,
+      locationName: location_name,
+      locationCoord: location_coords,
       coffeeType: type,
       price: price,
       rating: rating,
       visitedAt: visitedOn,
       user: userId,
       desc: desc,
+      createdAt: Date.now(),
     },
     config
   );

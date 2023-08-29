@@ -4,12 +4,16 @@ import { getAllReviews } from "../services/review";
 import ReviewPost from "../components/reviews-page/ReviewPost";
 import styles from "./ReviewsPage.module.scss";
 import chevronDown from "../assets/chevron-down.svg";
+import create from "../assets/add.svg";
 import searchLogo from "../assets/search.svg";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import CreateReview from "../components/create-review/CreateReview";
+import Cookies from "js-cookie";
 function ReviewsPage() {
   const [allReviews, setAllReviews] = useState<Review[]>([]);
   const [search, setSearch] = useState<string>("");
   const [shownReviews, setShownReviews] = useState<Review[]>([]);
+  const [isCreate, setIsCreate] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +24,7 @@ function ReviewsPage() {
       setShownReviews(res);
     };
     fetchData();
-  }, []);
+  }, [isCreate]);
 
   const [isSortedByDate, setIsSortedByDate] = useState(true);
   const [isSortedAsc, setIsSortedAsc] = useState(false);
@@ -56,8 +60,7 @@ function ReviewsPage() {
 
     if (search.length > 0) {
       const newReviews = allReviews.filter((review) => {
-        console.log(review.name);
-        return review.name
+        return review.title
           .toLowerCase()
           .replace(/[^\p{L}\p{N}\s]/gu, "")
           .replace(/ /g, "")
@@ -102,11 +105,22 @@ function ReviewsPage() {
               alignSelf: "center",
             }}
           >
+            {Cookies.get("token") && (
+              <button
+                onClick={() => setIsCreate(!isCreate)}
+                className={`${styles["create-btn"]}  ${
+                  isCreate ? styles["active"] : ""
+                }`}
+              >
+                <img src={create} alt="create" />
+              </button>
+            )}
             <div className={styles["searchBar"]}>
               <input
+                className={styles["searchBar-input"]}
                 value={search}
                 onChange={handleChange}
-                placeholder="Enter a cafe / restaurant / hawker name"
+                placeholder="Search for a title"
               ></input>
               <img src={searchLogo} alt="search" />
             </div>
@@ -132,18 +146,33 @@ function ReviewsPage() {
               </button>
             </div>
           </div>
-
-          {allReviews && (
-            <div className={styles.reviewsContainer}>
-              <div className={styles["reviews-container-screen"]}>
-                {getSortedByCat(shownReviews, isSortedByDate, isSortedAsc).map(
-                  (review) => (
+          <AnimatePresence mode="wait">
+            {allReviews && !isCreate && (
+              <div className={styles.reviewsContainer}>
+                <div className={styles["reviews-container-screen"]}>
+                  {getSortedByCat(
+                    shownReviews,
+                    isSortedByDate,
+                    isSortedAsc
+                  ).map((review) => (
                     <ReviewPost review={review} />
-                  )
-                )}
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {isCreate && (
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100 }}
+                transition={{ duration: 0.1 }}
+                style={{ height: "100%" }}
+              >
+                <CreateReview setIsCreate={setIsCreate} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </motion.div>
