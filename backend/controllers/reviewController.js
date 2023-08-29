@@ -13,6 +13,7 @@ exports.getAverageRatingGrouped = catchAsync(async (req, res, next) => {
       $group: {
         _id: "$locationName",
         locationAddress: { $first: "$locationAddress" }, // Take the first locationName within the group
+        locationCoords: { $first: "$locationCoord" },
         numReviews: { $sum: 1 },
         averageRating: { $avg: "$rating" },
       },
