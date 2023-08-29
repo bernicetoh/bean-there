@@ -9,6 +9,9 @@ router
   .post(authController.protect, reviewController.createReview);
 
 router
+  .route("/average-rating-by-location")
+  .get(reviewController.getAverageRatingGrouped);
+router
   .route("/:id")
   .get(reviewController.getReview)
   .patch(reviewController.updateReview)
