@@ -3,14 +3,23 @@ const validate = require("validator");
 
 const reviewSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, "A review must include a name"],
+      required: [true, "A review must include a title"],
       trim: true,
     },
-    location: {
-      type: String,
+    locationCoord: {
+      type: [Number, Number],
       trim: true,
+      required: [true, "A review must include a location"],
+    },
+    locationAddress: {
+      type: String,
+      required: [true, "A review must include a location"],
+    },
+    locationName: {
+      type: String,
+      required: [true, "A review must include the name of the place"],
     },
     coffeeType: {
       type: String,

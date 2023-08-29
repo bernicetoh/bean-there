@@ -1,44 +1,14 @@
 [
   {
     "id": 0,
-    "name": "Starbucks",
-    "location": "NEX Serangoon",
+    "title": "Starbucks",
+    "locationCoord": [103.8859446, 1.3616561],
+    "locationAddress": "5 Simon Road, Singapore 545893, Singapore",
+    "locationName": "Lola's Cafe",
     "coffeeType": "Ice Venti Latte",
     "price": "high",
     "rating": 3,
     "visitedAt": "2023-06-19T09:00:00.000Z",
-    "user": "64e41ff1699ed66428b34c2f"
-  },
-  {
-    "id": 1,
-    "name": "Tiong Bahru Bakery",
-    "location": "Anchorpoint Mall",
-    "coffeeType": "Ice Latte",
-    "price": "medium",
-    "rating": 3,
-    "visitedAt": "2023-05-19T09:00:00.000Z",
-    "description": "Cafe has a good ambience, coffee is strong and aromatic",
-    "user": "64e41ff1699ed66428b34c2f"
-  },
-  {
-    "id": 2,
-    "name": "Dutch Colony Coffee Co.",
-    "location": "New Tech Park",
-    "coffeeType": "Ice Mocha",
-    "price": "medium",
-    "rating": 3,
-    "visitedAt": "2023-03-19T09:00:00.000Z",
-    "user": "64e41ff1699ed66428b34c2f"
-  },
-  {
-    "id": 3,
-    "name": "YaKun Kaya Toast",
-    "location": "NEX Serangoon",
-    "coffeeType": "Kopi Bing Siew Dai",
-    "price": "low",
-    "rating": 4,
-    "visitedAt": "2023-07-30T09:00:00.000Z",
-    "description": "Shop is always crowded but it is a good morning coffee",
     "user": "64e41ff1699ed66428b34c2f"
   }
 ]
