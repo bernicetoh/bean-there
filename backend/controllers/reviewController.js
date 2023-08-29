@@ -11,16 +11,18 @@ exports.getAverageRatingGrouped = catchAsync(async (req, res, next) => {
   const data = await Review.aggregate([
     {
       $group: {
-        _id: "$locationAddress",
+        _id: "$locationName",
+        locationAddress: { $first: "$locationAddress" }, // Take the first locationName within the group
         numReviews: { $sum: 1 },
         averageRating: { $avg: "$rating" },
       },
     },
+    {
+      $sort: { averageRating: -1 },
+    },
   ]);
   res.status(200).json({
     status: "sucess",
-    data: {
-      data,
-    },
+    data: data,
   });
 });
