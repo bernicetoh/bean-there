@@ -1,0 +1,69 @@
+.avg-rating,
+.best-rating {
+  width: 100%;
+  height: 100vh;
+}
+
+.searchBar {
+  display: flex;
+  border: 1.5px solid grey;
+  border-radius: 30px;
+  height: 45px;
+  background-color: white;
+  flex: 1;
+  input {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex: 1;
+    padding: 5px 5px 5px 20px;
+  }
+
+  img {
+    border-radius: 100%;
+    background-color: #704638;
+    padding: 5px;
+    scale: 0.8;
+  }
+}
+
+.header {
+  color: #704638;
+  font-size: 1.8em;
+  line-height: 100%;
+  margin-bottom: 20px;
+}
+
+.ratings-div {
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  transition: ease-in-out 0.2s;
+}
+.rating-item {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.rating-name {
+  color: #704638;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.rating-address {
+  color: grey;
+}
+
+.rating {
+  color: #704638;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.user-location {
+  color: grey;
+}

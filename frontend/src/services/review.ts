@@ -1,4 +1,4 @@
-import { Review } from "../models/review.model";
+import { RatingByLocation, Review } from "../models/review.model";
 import axios from "axios";
 export async function getAllReviews(
   queryName: string,
@@ -59,4 +59,28 @@ export async function createReview(
   const parsedData = res.data.data as Review;
   console.log(parsedData);
   return parsedData;
+}
+
+export async function getAverageRatingByLocation(): Promise<
+  RatingByLocation[]
+> {
+  try {
+    const res = await axios.get("/reviews/average-rating-by-location");
+    const parsedData: RatingByLocation[] = (await res.data
+      .data) as RatingByLocation[];
+    return parsedData;
+  } catch (err) {
+    return [] as RatingByLocation[];
+  }
+}
+
+export async function getBestRatedLocations(): Promise<RatingByLocation[]> {
+  try {
+    const res = await axios.get("/reviews/best-rated-locations");
+    const parsedData: RatingByLocation[] = (await res.data
+      .data) as RatingByLocation[];
+    return parsedData;
+  } catch (err) {
+    return [] as RatingByLocation[];
+  }
 }
