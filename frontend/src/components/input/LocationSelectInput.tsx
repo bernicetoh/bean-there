@@ -3,6 +3,7 @@ import styles from "./LocationSelectInput.module.scss";
 import axios from "axios";
 import { Location } from "../../models/location.model";
 import { LocationRow } from "./LocationRow";
+import { getAutoComplete } from "../../services/location";
 
 interface Props {
   selectedLocation: Location | null;
@@ -18,26 +19,14 @@ export const LocationSelectInput = ({
       : ""
   );
 
-  const [autoComplete, setAutoComplete] = useState([]);
+  const [autoComplete, setAutoComplete] = useState<Location[]>([]);
 
   useEffect(() => {
-    const getAutocomplete = async () => {
-      const config = {
-        method: "get",
-        url: `https://api.geoapify.com/v1/geocode/autocomplete?text=${search}&apiKey=d1068570901b47a79c31cdd05445a4e6`,
-        headers: {},
-      };
-
-      axios(config)
-        .then(function (response) {
-          console.log(response.data.features);
-          setAutoComplete(response.data.features);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    const getSearchResults = async () => {
+      const autocomplete = await getAutoComplete(search);
+      setAutoComplete(autocomplete);
     };
-    getAutocomplete();
+    getSearchResults();
   }, [search]);
 
   const handleSelect = (location: Location) => {
