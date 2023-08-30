@@ -11,6 +11,11 @@ router
 router
   .route("/average-rating-by-location")
   .get(reviewController.getAverageRatingGrouped);
+
+router
+  .route("/best-rated-locations")
+  .get(reviewController.getBestRatedLocation);
+
 router
   .route("/:id")
   .get(reviewController.getReview)

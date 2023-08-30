@@ -19,6 +19,34 @@ exports.getAverageRatingGrouped = catchAsync(async (req, res, next) => {
       },
     },
     {
+      $sort: { _id: 1 },
+    },
+  ]);
+  res.status(200).json({
+    status: "sucess",
+    data: data,
+  });
+});
+
+exports.getBestRatedLocation = catchAsync(async (req, res, next) => {
+  const data = await Review.aggregate([
+    {
+      $match: {
+        rating: {
+          $gte: 4,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$locationName",
+        locationAddress: { $first: "$locationAddress" }, // Take the first locationName within the group
+        locationCoords: { $first: "$locationCoord" },
+        numReviews: { $sum: 1 },
+        averageRating: { $avg: "$rating" },
+      },
+    },
+    {
       $sort: { averageRating: -1 },
     },
   ]);
