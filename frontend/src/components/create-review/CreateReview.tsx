@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from "./CreateReview.module.scss";
 import AuthContext from "../../context/AuthProvider";
 import { createReview } from "../../services/review";
@@ -47,7 +47,7 @@ function CreateReview({ setIsCreate }: Props) {
       const jwt = Cookies.get("token");
       await createReview(
         title,
-        location.geometry.coordinates,
+        [location.properties.lat, location.properties.lon],
         location.properties.name,
         location.properties.address_line2,
         type,
@@ -75,6 +75,9 @@ function CreateReview({ setIsCreate }: Props) {
     if (!location) return "Please select a location";
   }
 
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
   return (
     <div className={styles["create-review"]}>
       <div className={styles["header"]}>

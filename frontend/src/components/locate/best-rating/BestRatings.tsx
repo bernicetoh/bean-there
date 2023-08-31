@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "../average-rating/AverageRatings.module.scss";
 import { RatingByLocation } from "../../../models/review.model";
-import { sortCoordsByNearest } from "../../../utils/location";
+import { calcCrow, sortCoordsByNearest } from "../../../utils/location";
 import { getBestRatedLocations } from "../../../services/review";
-import axios from "axios";
-import config from "../../../config/config";
 import { getAddressFromCoords } from "../../../services/location";
 import Star from "../../star/Star";
-import SkeletonElement from "../../skeletons/SkeletonElement";
 import SkeletonArticle from "../../skeletons/SkeletonArticle";
-import SkeletonLine from "../../skeletons/SkeletonLine";
+
 interface Props {
   userLocation: {
     latitude: number;
@@ -26,6 +23,7 @@ function BestRatings({ userLocation }: Props) {
     const getBestRatedNearest = async () => {
       const res = await getBestRatedLocations();
       setRatings(res);
+      console.log(res);
     };
     getBestRatedNearest();
   }, []);
@@ -69,6 +67,16 @@ function BestRatings({ userLocation }: Props) {
           {ratings.map((r) => (
             <div className={styles["rating-item"]}>
               <div className={styles["rating-name"]}>{r._id}</div>
+              <div className={styles["distance"]}>
+                {userLocation &&
+                  calcCrow(
+                    userLocation?.latitude,
+                    userLocation?.longitude,
+                    r.locationCoords[0],
+                    r.locationCoords[1]
+                  ).toFixed(2)}{" "}
+                km away
+              </div>
               <div className={styles["rating-address"]}>
                 {r.locationAddress}
               </div>

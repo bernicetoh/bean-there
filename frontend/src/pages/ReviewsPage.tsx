@@ -11,9 +11,9 @@ import CreateReview from "../components/create-review/CreateReview";
 import Cookies from "js-cookie";
 import SkeletonPost from "../components/skeletons/SkeletonPost";
 function ReviewsPage() {
-  const [allReviews, setAllReviews] = useState<Review[]>([]);
+  const [allReviews, setAllReviews] = useState<Review[]>();
   const [search, setSearch] = useState<string>("");
-  const [shownReviews, setShownReviews] = useState<Review[]>([]);
+  const [shownReviews, setShownReviews] = useState<Review[]>();
   const [isCreate, setIsCreate] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,13 @@ function ReviewsPage() {
 
   const [isSortedByDate, setIsSortedByDate] = useState(true);
   const [isSortedAsc, setIsSortedAsc] = useState(false);
-  const getSortedByCat = (arr: Review[], isDate: boolean, isAsc: boolean) => {
+
+  const getSortedByCat = (
+    arr: Review[] | undefined,
+    isDate: boolean,
+    isAsc: boolean
+  ) => {
+    if (!arr) return [];
     if (isDate && isAsc) {
       return arr.sort((a, b) => {
         return (
@@ -56,6 +62,7 @@ function ReviewsPage() {
   };
   const handleChange = (e: any) => {
     e.preventDefault();
+    if (!allReviews || allReviews.length === 0) return;
     console.log(e.target.value.replace(/[^\p{L}\p{N}\s]/gu, ""));
     setSearch(e.target.value);
 
@@ -168,16 +175,15 @@ function ReviewsPage() {
                 </div>
               </div>
             )}
-            {(!allReviews && !isCreate) ||
-              (allReviews.length === 0 && (
-                <div className={styles.reviewsContainer}>
-                  <div className={styles["reviews-container-screen"]}>
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <SkeletonPost key={n} />
-                    ))}
-                  </div>
+            {!allReviews && !isCreate && (
+              <div className={styles.reviewsContainer}>
+                <div className={styles["reviews-container-screen"]}>
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <SkeletonPost key={n} />
+                  ))}
                 </div>
-              ))}
+              </div>
+            )}
 
             {isCreate && (
               <motion.div
