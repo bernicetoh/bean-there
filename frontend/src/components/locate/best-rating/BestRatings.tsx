@@ -9,6 +9,7 @@ import { getAddressFromCoords } from "../../../services/location";
 import Star from "../../star/Star";
 import SkeletonElement from "../../skeletons/SkeletonElement";
 import SkeletonArticle from "../../skeletons/SkeletonArticle";
+import SkeletonLine from "../../skeletons/SkeletonLine";
 interface Props {
   userLocation: {
     latitude: number;
@@ -19,7 +20,7 @@ interface Props {
 function BestRatings({ userLocation }: Props) {
   console.log("userLocation", userLocation);
   const [ratings, setRatings] = useState<RatingByLocation[]>();
-  const [userAddress, setUserAddress] = useState("");
+  const [userAddress, setUserAddress] = useState<string>();
 
   useEffect(() => {
     const getBestRatedNearest = async () => {
@@ -41,7 +42,10 @@ function BestRatings({ userLocation }: Props) {
 
   useEffect(() => {
     const getAddress = async () => {
-      if (!userLocation) return;
+      if (!userLocation) {
+        setUserAddress("");
+        return;
+      }
       const address = await getAddressFromCoords(
         userLocation.latitude,
         userLocation.longitude
@@ -55,9 +59,9 @@ function BestRatings({ userLocation }: Props) {
     <div className={styles["best-rating"]}>
       <div className={styles["header"]}>Best rated near You</div>
       <div className={styles["user-location"]}>
-        <div>
-          <div>Your location:</div>
-          {userAddress}
+        <div>Your location:</div>
+        <div className={styles["user-add"]}>
+          {userAddress ? userAddress : ""}
         </div>
       </div>
       {ratings && (
@@ -77,7 +81,9 @@ function BestRatings({ userLocation }: Props) {
           ))}
         </div>
       )}
-      {!ratings && [1, 2, 3, 4].map((n) => <SkeletonArticle key={n} />)}
+      {!ratings &&
+        !userAddress &&
+        [1, 2, 3, 4].map((n) => <SkeletonArticle key={n} />)}
     </div>
   );
 }

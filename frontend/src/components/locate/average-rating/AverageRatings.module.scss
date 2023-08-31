@@ -66,4 +66,7 @@
 
 .user-location {
   color: grey;
+  display: flex;
+  flex-direction: column;
+  height: 45px;
 }

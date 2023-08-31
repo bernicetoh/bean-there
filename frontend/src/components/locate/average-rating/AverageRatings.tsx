@@ -83,7 +83,7 @@ function AverageRatings({ userLocation }: Props) {
           ))}
         </div>
       )}
-      {!shownRatings && [1, 2, 3, 4, 5].map((n) => <SkeletonArticle />)}
+      {!shownRatings && [1, 2, 3, 4, 5].map((n) => <SkeletonArticle key={n} />)}
     </div>
   );
 }

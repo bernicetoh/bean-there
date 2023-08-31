@@ -9,6 +9,7 @@ import searchLogo from "../assets/search.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import CreateReview from "../components/create-review/CreateReview";
 import Cookies from "js-cookie";
+import SkeletonPost from "../components/skeletons/SkeletonPost";
 function ReviewsPage() {
   const [allReviews, setAllReviews] = useState<Review[]>([]);
   const [search, setSearch] = useState<string>("");
@@ -148,7 +149,14 @@ function ReviewsPage() {
           </div>
           <AnimatePresence mode="wait">
             {allReviews && !isCreate && (
-              <div className={styles.reviewsContainer}>
+              <div
+                className={styles.reviewsContainer}
+                style={
+                  allReviews.length === 0 || !allReviews
+                    ? { display: "none" }
+                    : {}
+                }
+              >
                 <div className={styles["reviews-container-screen"]}>
                   {getSortedByCat(
                     shownReviews,
@@ -160,6 +168,16 @@ function ReviewsPage() {
                 </div>
               </div>
             )}
+            {(!allReviews && !isCreate) ||
+              (allReviews.length === 0 && (
+                <div className={styles.reviewsContainer}>
+                  <div className={styles["reviews-container-screen"]}>
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <SkeletonPost key={n} />
+                    ))}
+                  </div>
+                </div>
+              ))}
 
             {isCreate && (
               <motion.div
