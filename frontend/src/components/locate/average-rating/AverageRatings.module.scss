@@ -4,6 +4,10 @@
   height: 100vh;
 }
 
+.bars {
+  display: flex;
+  gap: 10px;
+}
 .searchBar {
   display: flex;
   border: 1.5px solid grey;
@@ -69,4 +73,37 @@
   display: flex;
   flex-direction: column;
   height: 45px;
+}
+
+.sortBtns {
+  display: flex;
+  border: 1.5px solid #704638;
+  border-radius: 30px;
+  width: max-content;
+  align-items: center;
+  height: 45px;
+
+  .sortcat {
+    background-color: transparent;
+    width: 80px;
+    height: 100%;
+    border: none;
+    color: #704638;
+    line-height: 100%;
+  }
+}
+
+.sortcat {
+  padding: 10px;
+}
+
+.chevron {
+  background-color: transparent;
+  height: 100%;
+  border: none;
+  color: #704638;
+  justify-content: start;
+  display: flex;
+  align-items: center;
+  width: 50px;
 }

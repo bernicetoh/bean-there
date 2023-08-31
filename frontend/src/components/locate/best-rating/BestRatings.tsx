@@ -75,7 +75,9 @@ function BestRatings({ userLocation }: Props) {
               <div className={styles["rating"]}>
                 <div>Average rating:</div>
                 <Star rating={r.averageRating} />
-                <div>{r.numReviews} Reviews</div>
+                <div>
+                  {r.numReviews} {r.numReviews === 1 ? "Review" : "Reviews"}
+                </div>
               </div>
             </div>
           ))}
