@@ -15,7 +15,6 @@ export interface Review {
   createdAt: Date;
   user: ReviewUserDetails;
 }
-// "64e41ff1699ed66428b34c2f"
 
 export interface RatingByLocation {
   // name of coffee spot
