@@ -3,14 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": ".commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "bernicetoh",
-  "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^3.0.1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd backend && nodemon server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,5 +15,8 @@
     "morgan": "^1.10.0",
     "promisify": "^0.0.3",
     "validator": "^13.11.0"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
