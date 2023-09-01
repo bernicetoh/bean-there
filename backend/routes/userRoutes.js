@@ -14,6 +14,7 @@ router.post("/resetPassword/:token", authController.resetPassword);
 router.use(authController.protect);
 router.post("/updateMyPassword", authController.updateMyPassword);
 router.get("/me", userController.getMe, userController.getUser);
+router.patch("/updateMe", userController.updateMe);
 
 // only admin
 router.use(authController.restrictTo("admin"));
