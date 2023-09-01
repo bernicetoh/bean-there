@@ -4,6 +4,7 @@ export interface Review {
   title: string;
   locationCoord: [number, number];
   locationAddress: string;
+  locationName: string;
   id: number;
   coffeeType: string;
   price: string;

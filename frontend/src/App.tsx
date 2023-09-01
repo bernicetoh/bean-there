@@ -15,7 +15,7 @@ function App() {
   const location = useLocation();
   const previousLocation = location.state?.previousLocation;
   return (
-    <div>
+    <div style={{ width: "100%", height: "100%" }}>
       <AnimatePresence mode="wait">
         <Routes location={previousLocation || location}>
           <Route path="/auth" element={<AuthPage />} />

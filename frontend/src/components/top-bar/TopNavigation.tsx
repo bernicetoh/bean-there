@@ -14,10 +14,7 @@ import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { UserDetails } from "../../models/user.model";
 import { logout } from "../../services/authentication";
-import { relative } from "path";
-interface Props {
-  children: ReactNode;
-}
+
 export default function TopNavigation() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,7 +43,7 @@ export default function TopNavigation() {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%", height: "100%" }}>
       <div className={styles["top-bar"]}>
         <Link className={styles.logoImg} to={"/home"}>
           <img src={logo} alt="logo" />
@@ -75,7 +72,6 @@ export default function TopNavigation() {
             <Link
               to={"auth"}
               className={styles.login}
-              // target="_blank"
               state={{ isRegister: false }}
             >
               <div>Log in</div>
@@ -83,7 +79,6 @@ export default function TopNavigation() {
             <Link
               to={"auth"}
               className={styles.signup}
-              // target="_blank"
               state={{ isRegister: true }}
             >
               <div>Sign up</div>
@@ -92,7 +87,9 @@ export default function TopNavigation() {
         )}
       </div>
 
-      <Outlet />
+      <div style={{ height: "92%" }}>
+        <Outlet />
+      </div>
     </div>
   );
 }
@@ -118,6 +115,8 @@ function CustomLink({ to, children }: CustomLinkProps) {
             position: "absolute",
             inset: 0,
             margin: "0 auto",
+            justifyContent: "center",
+            alignContent: "center",
           }}
         />
       )}

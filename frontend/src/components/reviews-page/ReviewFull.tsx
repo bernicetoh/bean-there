@@ -27,18 +27,35 @@ function ReviewFull() {
         <div className={styles["review-container"]}>
           <div className={styles["left-container"]}>
             <div className={styles["left-container-content"]}>
-              <Link to={"/reviews"} className={styles["back"]}>
-                <img src={chevronDown} alt="back" />
-              </Link>
-              <div className={styles["review-details"]}>
-                <div className={styles["name"]}>{review.title}</div>
-                <div className={styles["location"]}>
-                  {review.locationAddress}
+              <div className={styles["header"]}>
+                <Link to={"/reviews"} className={styles["back"]}>
+                  <img src={chevronDown} alt="back" />
+                </Link>
+                <div className={styles["review-details"]}>
+                  <div className={styles["name"]}>{review.title}</div>
+                  <div className={styles["posted-by"]}>
+                    Posted by: {review.user.username}
+                  </div>
+                  <div className={styles["location"]}>
+                    <div style={{ fontWeight: "800" }}>
+                      {review.locationName}
+                    </div>
+                    <div>{review.locationAddress}</div>
+                  </div>
+                  {review.visitedAt && (
+                    <div>Visited on: {convertDate(review.visitedAt)}</div>
+                  )}
                 </div>
-                {review.visitedAt && (
-                  <div>Visited on: {convertDate(review.visitedAt)}</div>
-                )}
-                <div>{review.description}</div>
+
+                <div className={styles["desc"]}>
+                  {review.description ? (
+                    <div>{review.description}</div>
+                  ) : (
+                    <div style={{ fontStyle: "italic", color: "grey" }}>
+                      No description left by author
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
