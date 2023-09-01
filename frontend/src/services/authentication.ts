@@ -41,3 +41,34 @@ export async function getCurrentUser(token: string) {
   const parsedData: UserDetails = data.data.data as UserDetails;
   return parsedData;
 }
+
+export async function updateMe(name: string, email: string, token: string) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const data = await axios.patch("/users/updateMe", { name, email }, config);
+  const parsedData: UserDetails = data.data.data as UserDetails;
+  return parsedData;
+}
+
+export async function updateMyPassword(
+  curr: string,
+  newPassword: string,
+  rePassword: string,
+  token: string
+) {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  const data = await axios.post(
+    "/users/updateMyPassword",
+    {
+      passwordCurrent: curr,
+      password: newPassword,
+      confirmPassword: rePassword,
+    },
+    config
+  );
+  const parsedData: string = data.data.data;
+  return parsedData;
+}

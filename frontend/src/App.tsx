@@ -9,6 +9,7 @@ import TopNavigation from "./components/top-bar/TopNavigation";
 import { AnimatePresence } from "framer-motion";
 import LocatePage from "./pages/LocatePage";
 import AuthPage from "./pages/AuthPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const location = useLocation();
@@ -18,6 +19,7 @@ function App() {
       <AnimatePresence mode="wait">
         <Routes location={previousLocation || location}>
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/me" element={<ProfilePage />} />
           <Route path="/" element={<TopNavigation />}>
             <Route path="reviews" element={<ReviewsPage />} />
             <Route path="home" element={<HomePage />} />

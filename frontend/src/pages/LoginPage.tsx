@@ -50,7 +50,6 @@ function LoginPage({ setMode }: Props) {
       console.log(token);
 
       const user = await getCurrentUser(token);
-      setAuthState({ userInfo: user, loggedIn: true, jwt: token });
       Cookies.set("token", token, {
         expires: 7,
       });

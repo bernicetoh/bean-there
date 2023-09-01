@@ -61,7 +61,9 @@ export default function TopNavigation() {
         {Cookies.get("token") && user && (
           <div className={styles["auth-container"]}>
             <button className={styles["profile"]}>
-              <p>{user.username}</p>
+              <Link to={"/me"} className={styles["profile-link"]}>
+                {user.username}
+              </Link>
             </button>
             <button onClick={() => handleLogout()} className={styles["logout"]}>
               <div>Log out</div>
