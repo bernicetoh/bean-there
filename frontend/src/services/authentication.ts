@@ -1,7 +1,7 @@
 import { UserDetails } from "../models/user.model";
-import axios from "axios";
+import axiosInstance from "../config/axios";
 export async function login(email: string, password: string) {
-  return await axios.post(
+  return await axiosInstance.post(
     "/users/login",
     {
       email: email,
@@ -12,7 +12,7 @@ export async function login(email: string, password: string) {
 }
 
 export async function logout() {
-  return await axios.get(
+  return await axiosInstance.get(
     "/users/logout"
     // { withCredentials: true }
   );
@@ -24,7 +24,7 @@ export async function signup(
   repassword: string,
   username: string
 ) {
-  return await axios.post("/users/signup", {
+  return await axiosInstance.post("/users/signup", {
     name: name,
     email: email,
     password: password,
@@ -37,7 +37,7 @@ export async function getCurrentUser(token: string) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const data = await axios.get("/users/me", config);
+  const data = await axiosInstance.get("/users/me", config);
   const parsedData: UserDetails = data.data.data as UserDetails;
   return parsedData;
 }
@@ -46,7 +46,11 @@ export async function updateMe(name: string, email: string, token: string) {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const data = await axios.patch("/users/updateMe", { name, email }, config);
+  const data = await axiosInstance.patch(
+    "/users/updateMe",
+    { name, email },
+    config
+  );
   const parsedData: UserDetails = data.data.data as UserDetails;
   return parsedData;
 }
@@ -60,7 +64,7 @@ export async function updateMyPassword(
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const data = await axios.post(
+  const data = await axiosInstance.post(
     "/users/updateMyPassword",
     {
       passwordCurrent: curr,

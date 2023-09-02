@@ -49,7 +49,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://bean-there-api.onrender.com/api/v1",
   "devDependencies": {
     "@types/google.maps": "^3.54.0",
     "@types/js-cookie": "^3.0.3",

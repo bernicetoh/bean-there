@@ -1,5 +1,6 @@
 import { RatingByLocation, Review } from "../models/review.model";
-import axios from "axios";
+import axiosInstance from "../config/axios";
+
 export async function getAllReviews(
   queryName: string,
   abortSignal: AbortSignal
@@ -10,7 +11,7 @@ export async function getAllReviews(
       abortSignal: abortSignal,
       withCredentials: true,
     };
-    const res = await axios.get("/reviews", queryName ? config : {});
+    const res = await axiosInstance.get("/reviews", queryName ? config : {});
     const parsedData: Review[] = res.data.data as Review[];
     return parsedData;
   } catch (err) {
@@ -20,7 +21,7 @@ export async function getAllReviews(
 }
 
 export async function getReviewById(id: string): Promise<Review> {
-  const res = await axios.get(`/reviews/${id}`);
+  const res = await axiosInstance.get(`/reviews/${id}`);
   const parsedData: Review = res.data.data as Review;
   return parsedData;
 }
@@ -39,7 +40,7 @@ export async function createReview(
   userId: string
 ): Promise<Review> {
   const config = { headers: { Authorization: `Bearer ${token}` } };
-  const res = await axios.post(
+  const res = await axiosInstance.post(
     "/reviews",
     {
       title: title,
@@ -65,7 +66,7 @@ export async function getAverageRatingByLocation(): Promise<
   RatingByLocation[]
 > {
   try {
-    const res = await axios.get("/reviews/average-rating-by-location");
+    const res = await axiosInstance.get("/reviews/average-rating-by-location");
     const parsedData: RatingByLocation[] = (await res.data
       .data) as RatingByLocation[];
     return parsedData;
@@ -76,7 +77,7 @@ export async function getAverageRatingByLocation(): Promise<
 
 export async function getBestRatedLocations(): Promise<RatingByLocation[]> {
   try {
-    const res = await axios.get("/reviews/best-rated-locations");
+    const res = await axiosInstance.get("/reviews/best-rated-locations");
     const parsedData: RatingByLocation[] = (await res.data
       .data) as RatingByLocation[];
     return parsedData;
