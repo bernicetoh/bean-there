@@ -9,11 +9,13 @@ const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
 // Global middlewares
+app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "/public")));
+// app.use(express.static(path.join(__dirname, "")));
 
 // Set security HTTP headers
 app.use(helmet());
