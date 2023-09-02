@@ -8,11 +8,12 @@ const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const path = require("path");
 
 const app = express();
 // Global middlewares
 app.use(express.json());
-app.use(express.static(`../frontend`));
+app.use(express.static(path.join(__dirname, "/public")));
 
 // Set security HTTP headers
 app.use(helmet());
