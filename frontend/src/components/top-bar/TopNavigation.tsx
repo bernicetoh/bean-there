@@ -50,7 +50,7 @@ export default function TopNavigation() {
         </Link>
         <nav className="nav">
           <ul>
-            <CustomLink to="/home">Home</CustomLink>
+            <CustomLink to="/">Home</CustomLink>
             <CustomLink to="/reviews">Reviews</CustomLink>
             <CustomLink to="/locate">Locate</CustomLink>
           </ul>
@@ -87,7 +87,7 @@ export default function TopNavigation() {
         )}
       </div>
 
-      <div style={{ height: "92%" }}>
+      <div style={{ height: "87%" }}>
         <Outlet />
       </div>
     </div>

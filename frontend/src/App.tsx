@@ -22,7 +22,7 @@ function App() {
           <Route path="/me" element={<ProfilePage />} />
           <Route path="/" element={<TopNavigation />}>
             <Route path="reviews" element={<ReviewsPage />} />
-            <Route path="home" element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="locate" element={<LocatePage />} />
           </Route>
         </Routes>

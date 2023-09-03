@@ -53,7 +53,7 @@ function SignupPage({ setMode }: Props) {
       // setAuthState({ userInfo: user, loggedIn: true, });
       localStorage.setItem("user", JSON.stringify(user));
       setErrMsg("");
-      navigate("/home");
+      navigate("/");
     } catch (e: any) {
       setErrMsg(e.response.data.message);
       // resetForm();

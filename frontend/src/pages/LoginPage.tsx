@@ -56,7 +56,7 @@ function LoginPage({ setMode }: Props) {
       localStorage.setItem("user", JSON.stringify(user));
       console.log(localStorage);
       setErrMsg("");
-      navigate("/home");
+      navigate("/");
     } catch (e: any) {
       setErrMsg(e.response.data.message);
       // resetForm();

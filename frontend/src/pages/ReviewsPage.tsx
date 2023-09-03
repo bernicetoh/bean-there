@@ -106,7 +106,6 @@ function ReviewsPage() {
           <div
             style={{
               display: "flex",
-              flex: 1,
               padding: "0px 50px",
               gap: "10px",
               width: "40%",
@@ -157,7 +156,7 @@ function ReviewsPage() {
           <AnimatePresence mode="wait">
             {allReviews && !isCreate && (
               <div
-                className={styles.reviewsContainer}
+                className={styles["centered"]}
                 style={
                   allReviews.length === 0 || !allReviews
                     ? { display: "none" }
@@ -176,9 +175,9 @@ function ReviewsPage() {
               </div>
             )}
             {!allReviews && !isCreate && (
-              <div className={styles.reviewsContainer}>
+              <div className={styles["centered"]}>
                 <div className={styles["reviews-container-screen"]}>
-                  {[1, 2, 3, 4, 5].map((n) => (
+                  {[1, 2, 3, 4].map((n) => (
                     <SkeletonPost key={n} />
                   ))}
                 </div>

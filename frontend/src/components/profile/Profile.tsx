@@ -81,7 +81,7 @@ function Profile({ setMode }: Props) {
       className={styles["container"]}
     >
       <div className={styles["header"]}>
-        <button onClick={() => navigate("/home")}>
+        <button onClick={() => navigate("/")}>
           <img
             src={chevronDown}
             alt="back"
