@@ -34,7 +34,7 @@ export async function createReview(
   type: string,
   price: string,
   rating: number,
-  desc: string,
+  description: string,
   visitedOn: Date | null,
   token: string,
   userId: string
